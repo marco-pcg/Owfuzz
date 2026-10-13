@@ -45,6 +45,18 @@ Owfuzz can also use a wireless network card that supports monitor mode and frame
 	- -f [log file], Log file path
 	- -h Help.
 
+## Protocol-family extension work
+
+The `test/add-features` work adds a protocol registry, independent mutation and
+transport strategies, the existing 42 WiFi frame entries (including one pre-existing
+empty stub), an Ethernet ARP module,
+and an experimental 802.11be Multi-Link element corpus. See
+[architecture and usage](docs/protocol-extension.md) and
+[extension-effort study](docs/extension-study.md) for supported scope and evaluation.
+
+Build without radio dependencies using `make -C owfuzz offline`; run the
+hardware-free checks with `make -C owfuzz test-protocols`.
+
 ## Building
 ### Kali/Ubuntu
 - Install dependencies
@@ -52,9 +64,9 @@ Owfuzz can also use a wireless network card that supports monitor mode and frame
 sudo apt-get install pkg-config libnl-3-dev libnl-genl-3-dev libpcap-dev
 ```
 
-- Compiling
+- Compiling (from the repository root)
 ```
-make
+make -C owfuzz
 ```
 
 ### OpenWiFi

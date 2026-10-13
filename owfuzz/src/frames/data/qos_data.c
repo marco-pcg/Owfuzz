@@ -345,8 +345,8 @@ void create_eapol_m1(struct packet *pkt)
 
 		generate_random_data(wpa_auth.nonce, sizeof(wpa_auth.nonce), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_iv, sizeof(wpa_auth.key_iv), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_mic, sizeof(wpa_auth.key_mic), VALUE_RANDOM);
 
 		switch (fuzzing_opt.auth_type)
@@ -509,8 +509,8 @@ void create_eapol_m2(struct packet *pkt)
 
 		generate_random_data(wpa_auth.nonce, sizeof(wpa_auth.nonce), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_iv, sizeof(wpa_auth.key_iv), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_mic, sizeof(wpa_auth.key_mic), VALUE_RANDOM);
 
 		switch (fuzzing_opt.auth_type)
@@ -676,8 +676,8 @@ void create_eapol_m3(struct packet *pkt)
 
 		generate_random_data(wpa_auth.nonce, sizeof(wpa_auth.nonce), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_iv, sizeof(wpa_auth.key_iv), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_mic, sizeof(wpa_auth.key_mic), VALUE_RANDOM);
 
 		switch (fuzzing_opt.auth_type)
@@ -840,8 +840,8 @@ void create_eapol_m4(struct packet *pkt)
 
 		generate_random_data(wpa_auth.nonce, sizeof(wpa_auth.nonce), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_iv, sizeof(wpa_auth.key_iv), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
-		generate_random_data(wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_rsc, sizeof(wpa_auth.key_rsc), VALUE_RANDOM);
+		generate_random_data((uint8_t *)&wpa_auth.key_id, sizeof(wpa_auth.key_id), VALUE_RANDOM);
 		generate_random_data(wpa_auth.key_mic, sizeof(wpa_auth.key_mic), VALUE_RANDOM);
 
 		switch (fuzzing_opt.auth_type)

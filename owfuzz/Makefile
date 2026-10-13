@@ -43,3 +43,13 @@ clean:
 
 	rm -f *.o *.so *.a *~
 
+
+.PHONY: test-protocols offline
+test-protocols:
+	$(MAKE) -C src/protocols test
+offline:
+	$(MAKE) -C src/protocols offline
+
+.PHONY: test-integrated
+test-integrated: all
+	python3 src/protocols/test_integrated.py src/owfuzz

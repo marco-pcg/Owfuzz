@@ -27,6 +27,7 @@
 #include <sys/time.h>
 #include "kismet_wifi_control.h"
 #include "frames/frame.h"
+#include "frames/legacy_registry.h"
 #include "common/log.h"
 #include "common/pcap_log.h"
 #include "common/config.h"
@@ -66,81 +67,6 @@ uint8_t p2p_frames[] = {
 	IEEE80211_TYPE_ACTION};
 uint8_t ap_frames[] = {};
 uint8_t sta_frames[] = {};
-
-uint8_t all_frames[] =
-	{
-		// management
-		IEEE80211_TYPE_ASSOCREQ,
-		IEEE80211_TYPE_ASSOCRES,
-		IEEE80211_TYPE_REASSOCREQ,
-		IEEE80211_TYPE_REASSOCRES,
-		IEEE80211_TYPE_PROBEREQ,
-		IEEE80211_TYPE_PROBERES,
-		IEEE80211_TYPE_TIMADVERT,
-		// IEEE80211_TYPE_000111,
-		IEEE80211_TYPE_BEACON,
-		IEEE80211_TYPE_ATIM,
-		// IEEE80211_TYPE_DISASSOC,
-		IEEE80211_TYPE_AUTH,
-		// IEEE80211_TYPE_DEAUTH,
-		IEEE80211_TYPE_ACTION,
-		IEEE80211_TYPE_ACTIONNOACK,
-		// IEEE80211_TYPE_001111,
-
-		// control
-		// IEEE80211_TYPE_010000,
-		// IEEE80211_TYPE_010001,
-		// IEEE80211_TYPE_010010,
-		// IEEE80211_TYPE_010011,
-		IEEE80211_TYPE_BEAMFORMING,
-		IEEE80211_TYPE_VHT,
-		IEEE80211_TYPE_CTRLFRMEXT,
-		IEEE80211_TYPE_CTRLWRAP,
-		IEEE80211_TYPE_BLOCKACKREQ,
-		IEEE80211_TYPE_BLOCKACK,
-		IEEE80211_TYPE_PSPOLL,
-		IEEE80211_TYPE_RTS,
-		IEEE80211_TYPE_CTS,
-		IEEE80211_TYPE_ACK,
-		IEEE80211_TYPE_CFEND,
-		IEEE80211_TYPE_CFENDACK,
-
-		// data
-		IEEE80211_TYPE_DATA,
-		IEEE80211_TYPE_DATACFACK,
-		IEEE80211_TYPE_DATACFPOLL,
-		IEEE80211_TYPE_DATACFACKPOLL,
-		IEEE80211_TYPE_NULL,
-		IEEE80211_TYPE_CFACK,
-		IEEE80211_TYPE_CFPOLL,
-		IEEE80211_TYPE_CFACKPOLL,
-		IEEE80211_TYPE_QOSDATA,
-		IEEE80211_TYPE_QOSDATACFACK,
-		IEEE80211_TYPE_QOSDATACFPOLL,
-		IEEE80211_TYPE_QOSDATACFACKPOLL,
-		IEEE80211_TYPE_QOSNULL,
-		IEEE80211_TYPE_QOSCFACK,
-		IEEE80211_TYPE_QOSCFPOLL,
-		IEEE80211_TYPE_QOSCFACKPOLL,
-
-		// extension
-		// IEEE80211_TYPE_DMGBEACON,
-		/*IEEE80211_TYPE_110001,
-		IEEE80211_TYPE_110010,
-		IEEE80211_TYPE_110011,
-		IEEE80211_TYPE_110100,
-		IEEE80211_TYPE_110101,
-		IEEE80211_TYPE_110110,
-		IEEE80211_TYPE_110111,
-		IEEE80211_TYPE_111000,
-		IEEE80211_TYPE_111001,
-		IEEE80211_TYPE_111010,
-		IEEE80211_TYPE_111011,
-		IEEE80211_TYPE_111100,
-		IEEE80211_TYPE_111101,
-		IEEE80211_TYPE_111110,
-		IEEE80211_TYPE_111111*/
-};
 
 HashTable *ht_notification_hash = NULL;
 
@@ -1729,147 +1655,8 @@ void handle_mitm(struct packet *pkt, struct ether_addr bssid, struct ether_addr 
 */
 const char *return_frame_name(uint8_t type)
 {
-	switch (type)
-	{
-	// management   addr1,addr2,addr3
-	case IEEE80211_TYPE_ASSOCRES: // AP
-		return "(management)IEEE80211_TYPE_ASSOCRES";
-		break;
-	case IEEE80211_TYPE_REASSOCRES:
-		return "(management)IEEE80211_TYPE_REASSOCRES";
-		break;
-	case IEEE80211_TYPE_PROBERES:
-		return "(management)IEEE80211_TYPE_PROBERES";
-		break;
-	case IEEE80211_TYPE_TIMADVERT:
-		return "(management)IEEE80211_TYPE_TIMADVERT";
-		break;
-	case IEEE80211_TYPE_BEACON:
-		return "(management)IEEE80211_TYPE_BEACON";
-		break;
-	case IEEE80211_TYPE_ATIM:
-		return "(management)IEEE80211_TYPE_ATIM";
-		break;
-	case IEEE80211_TYPE_DISASSOC:
-		return "(management)IEEE80211_TYPE_DISASSOC";
-		break;
-	case IEEE80211_TYPE_DEAUTH:
-		return "(management)IEEE80211_TYPE_DEAUTH";
-		break;
-	case IEEE80211_TYPE_ACTION:
-		return "(management)IEEE80211_TYPE_ACTION";
-		break;
-	case IEEE80211_TYPE_ACTIONNOACK:
-		return "(management)IEEE80211_TYPE_ACTIONNOACK";
-		break;
-	case IEEE80211_TYPE_ASSOCREQ: // STA
-		return "(management)IEEE80211_TYPE_ASSOCREQ";
-		break;
-	case IEEE80211_TYPE_REASSOCREQ:
-		return "(management)IEEE80211_TYPE_REASSOCREQ";
-		break;
-	case IEEE80211_TYPE_PROBEREQ:
-		return "(management)IEEE80211_TYPE_PROBEREQ";
-		break;
-	case IEEE80211_TYPE_AUTH:
-		return "(management)IEEE80211_TYPE_AUTH";
-		break;
-
-	// control addr1,(addr2)
-	case IEEE80211_TYPE_BEAMFORMING:
-		return ">(control)IEEE80211_TYPE_BEAMFORMING";
-		break;
-	case IEEE80211_TYPE_VHT:
-		return "(control)IEEE80211_TYPE_VHT";
-		break;
-	case IEEE80211_TYPE_CTRLFRMEXT:
-		return "(control)IEEE80211_TYPE_CTRLFRMEXT";
-		break;
-	case IEEE80211_TYPE_CTRLWRAP:
-		return "(control)IEEE80211_TYPE_CTRLWRAP";
-		break;
-	case IEEE80211_TYPE_BLOCKACKREQ:
-		return "(control)IEEE80211_TYPE_BLOCKACKREQ";
-		break;
-	case IEEE80211_TYPE_BLOCKACK:
-		return "(control)IEEE80211_TYPE_BLOCKACK";
-		break;
-	case IEEE80211_TYPE_PSPOLL:
-		return "(control)IEEE80211_TYPE_PSPOLL";
-		break;
-	case IEEE80211_TYPE_RTS:
-		return "(control)IEEE80211_TYPE_RTS";
-		break;
-	case IEEE80211_TYPE_CTS:
-		return "(control)IEEE80211_TYPE_CTS";
-		break;
-	case IEEE80211_TYPE_ACK:
-		return "(control)IEEE80211_TYPE_ACK";
-		break;
-	case IEEE80211_TYPE_CFEND:
-		return "(control)IEEE80211_TYPE_CFEND";
-		break;
-	case IEEE80211_TYPE_CFENDACK:
-		return "(control)IEEE80211_TYPE_CFENDACK";
-		break;
-
-	// data addr1,addr2,addr3,(addr4)
-	case IEEE80211_TYPE_DATA:
-		return "(data)IEEE80211_TYPE_DATA";
-		break;
-	case IEEE80211_TYPE_DATACFACK:
-		return "(data)IEEE80211_TYPE_DATACFACK";
-		break;
-	case IEEE80211_TYPE_DATACFPOLL:
-		return "(data)IEEE80211_TYPE_DATACFPOLL";
-		break;
-	case IEEE80211_TYPE_DATACFACKPOLL:
-		return "(data)IEEE80211_TYPE_DATACFACKPOLL";
-		break;
-	case IEEE80211_TYPE_NULL:
-		return "(data)IEEE80211_TYPE_NULL";
-		break;
-	case IEEE80211_TYPE_CFACK:
-		return "(data)IEEE80211_TYPE_CFACK";
-		break;
-	case IEEE80211_TYPE_CFPOLL:
-		return "(data)IEEE80211_TYPE_CFPOLL";
-		break;
-	case IEEE80211_TYPE_CFACKPOLL:
-		return "(data)IEEE80211_TYPE_CFACKPOLL";
-		break;
-	case IEEE80211_TYPE_QOSDATA:
-		return "(data)IEEE80211_TYPE_QOSDATA";
-		break;
-	case IEEE80211_TYPE_QOSDATACFACK:
-		return "(data)IEEE80211_TYPE_QOSDATACFACK";
-		break;
-	case IEEE80211_TYPE_QOSDATACFPOLL:
-		return "(data)IEEE80211_TYPE_QOSDATACFPOLL";
-		break;
-	case IEEE80211_TYPE_QOSDATACFACKPOLL:
-		return "(data)IEEE80211_TYPE_QOSDATACFACKPOLL";
-		break;
-	case IEEE80211_TYPE_QOSNULL:
-		return "(data)IEEE80211_TYPE_QOSNULL";
-		break;
-	case IEEE80211_TYPE_QOSCFPOLL:
-		return "(data)IEEE80211_TYPE_QOSCFPOLL";
-		break;
-	case IEEE80211_TYPE_QOSCFACKPOLL:
-		return "(data)IEEE80211_TYPE_QOSCFACKPOLL";
-		break;
-
-	// extension
-	case IEEE80211_TYPE_DMGBEACON:
-		return "(extension)IEEE80211_TYPE_DMGBEACON";
-		break;
-	default:
-		return "unknown frame";
-		break;
-	}
-
-	return "unknown";
+    const struct ow_wifi_frame *frame = ow_wifi_find_id(type);
+    return frame ? frame->label : "unknown frame";
 }
 
 /*
@@ -1927,7 +1714,7 @@ void *start_fuzzing(void *param)
 			// frame_array_size = sizeof(ap_frames)/sizeof(ap_frames[0]);
 			// fuzz_frames = ap_frames;
 			fuzz_logger_log(FUZZ_LOG_INFO, "Getting AP frames");
-			owfuzz_config_get_ap_frames(NULL, owfuzz_frames, &frame_array_size);
+			if (owfuzz_config_get_ap_frames(NULL, owfuzz_frames, &frame_array_size)) return NULL;
 			fuzz_frames = owfuzz_frames;
 		}
 		else if (FUZZ_WORK_MODE_STA == fuzzing_opt->fuzz_work_mode)
@@ -1936,7 +1723,7 @@ void *start_fuzzing(void *param)
 			// frame_array_size = sizeof(sta_frames)/sizeof(sta_frames[0]);
 			// fuzz_frames = sta_frames;
 			fuzz_logger_log(FUZZ_LOG_INFO, "Getting STA frames");
-			owfuzz_config_get_sta_frames(NULL, owfuzz_frames, &frame_array_size);
+			if (owfuzz_config_get_sta_frames(NULL, owfuzz_frames, &frame_array_size)) return NULL;
 			fuzz_frames = owfuzz_frames;
 		}
 		else if (FUZZ_WORK_MODE_MITM == fuzzing_opt->fuzz_work_mode)
@@ -2795,7 +2582,7 @@ int fuzzing(int argc, char *argv[])
 
 	if (argc > 1)
 	{
-		while ((c = getopt(argc, argv, "m:i:t:s:b:I:c:hS:A:T:l:f")) < 255)
+		while ((c = getopt(argc, argv, "m:i:t:s:b:I:c:hS:A:T:l:f:r:")) < 255)
 		{
 			switch (c)
 			{
@@ -2914,9 +2701,11 @@ int fuzzing(int argc, char *argv[])
 			case 'f':
 				file_log_path = strdup(optarg);
 				strncpy(fuzzing_opt.log_file, file_log_path, sizeof(fuzzing_opt.log_file) - 1);
+				break;
 			case 'r':
 				seed_str = strdup(optarg);
 				sscanf(seed_str, "%lu", &seed);
+				fuzzing_opt.seed = seed;
 				break;
 			default:
 				fuzz_logger_log(FUZZ_LOG_ERR, "Unknow option %c!", c);
@@ -2971,9 +2760,9 @@ int fuzzing(int argc, char *argv[])
 			return -1;
 		}
 
-		if (test_type > 2)
+		if (test_type < -1 || test_type > TEST_FRAME)
 		{
-			fuzz_logger_log(FUZZ_LOG_ERR, "Test type is error: %s", test_type);
+			fuzz_logger_log(FUZZ_LOG_ERR, "Test type is error: %d", test_type);
 			usage_help(argv[0]);
 			return -1;
 		}
@@ -3136,7 +2925,7 @@ int fuzzing(int argc, char *argv[])
 	{
 		fuzzing_opt.enable_check_alive = 1;
 		// fuzz_logger_log(FUZZ_LOG_INFO, "IP Address has been provided: '%s', init_ping_sock called", fuzzing_opt.target_ip);
-		init_ping_sock(&fuzzing_opt);
+		init_ping_sock();
 	}
 
 	if (TEST_INTERACTIVE == fuzzing_opt.test_type)
