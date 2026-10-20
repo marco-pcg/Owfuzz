@@ -1,3 +1,7 @@
 *.o
 *.a
 src/owfuzz
+
+# Native Go build and local coverage artifacts
+/bin/
+/coverage.out
