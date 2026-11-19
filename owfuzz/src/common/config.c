@@ -17,6 +17,7 @@
  * along with owfuzz.  If not, see <https://www.gnu.org/licenses/>.
  ****************************************************************************/
 #include "config.h"
+#include "../frames/legacy_registry.h"
 #include "log.h"
 #include "../../linux_wifi/control/kismet_wifi_control.h"
 
@@ -25,546 +26,56 @@
 */
 FILE *owfuzz_config_open(char *cfg_file)
 {
-	char owfuzz_cfg_path[256] = {0};
-	FILE *fp1 = NULL;
-	char *ptr;
-
-	if (readlink("/proc/self/exe", owfuzz_cfg_path, sizeof(owfuzz_cfg_path)) > 0)
-	{
-		ptr = strrchr(owfuzz_cfg_path, '/');
-		if (NULL != ptr)
-		{
-			ptr[1] = '\0';
-			strcat(owfuzz_cfg_path, "owfuzz.cfg");
-
-			if (NULL == cfg_file)
-			{
-				fp1 = fopen(owfuzz_cfg_path, "r");
-			}
-			else
-			{
-				fp1 = fopen(cfg_file, "r");
-			}
-		}
-	}
-
-	fuzz_logger_log(FUZZ_LOG_DEBUG, "owfuzz.cfg: %s", owfuzz_cfg_path);
-
-	return fp1;
+    char path[512];
+    char *slash;
+    ssize_t length;
+    if (cfg_file) return fopen(cfg_file, "r");
+    length = readlink("/proc/self/exe", path, sizeof(path) - 1);
+    if (length <= 0 || (size_t)length >= sizeof(path) - 1) return NULL;
+    path[length] = '\0';
+    slash = strrchr(path, '/');
+    if (!slash || (size_t)(slash + 1 - path) + sizeof("owfuzz.cfg") > sizeof(path)) return NULL;
+    strcpy(slash + 1, "owfuzz.cfg");
+    fuzz_logger_log(FUZZ_LOG_DEBUG, "owfuzz.cfg: %s", path);
+    return fopen(path, "r");
 }
 
 /*
 	Pull from the owfuzz.cfg file the [sta-frames] settings
 */
-int owfuzz_config_get_sta_frames(char *cfg_file, uint8_t *owfuzz_frames, uint32_t *frame_cnt)
+static int owfuzz_config_get_frames(char *cfg_file, const char *section,
+                                    uint8_t *frames, uint32_t *count)
 {
-	FILE *fp1;
-	char buf[256] = {0};
-	char frame_name[64] = {0};
-	int rc = 0, onoff;
-	int frm_idx = 0;
-
-	fp1 = owfuzz_config_open(cfg_file);
-	if (fp1 == NULL)
-	{
-		fuzz_logger_log(FUZZ_LOG_ERR, "Failed to open '%s'.", NULL == cfg_file ? "owfuzz.cfg" : cfg_file);
-		return -1;
-	}
-
-	while (!feof(fp1))
-	{
-		memset(buf, 0, sizeof(buf));
-		if (fgets(buf, sizeof(buf), fp1))
-		{
-			if (buf[0] == '#' || buf[0] == '\r' || buf[0] == '\n')
-				continue;
-
-			if (buf[0] == '[')
-			{
-				if (strstr(buf, "[sta-frames]") && (rc == 0))
-				{
-					// Mark that we are in the relevant section
-					rc = 1;
-					continue;
-				}
-				else
-				{
-					if (rc == 1)
-					{
-						// If we were in the relevant section, and now we changed
-						// let the code below know
-						rc = 0;
-						break;
-					}
-					else
-						continue;
-				}
-			}
-
-			if (rc)
-			{
-				onoff = 0;
-				memset(frame_name, 0, sizeof(frame_name));
-				sscanf(buf, "%[^=]=%d", frame_name, &onoff);
-				if (1 == onoff)
-				{
-					// management
-					if (strcmp(frame_name, "association_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ASSOCREQ;
-					}
-					else if (strcmp(frame_name, "association_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ASSOCRES;
-					}
-					else if (strcmp(frame_name, "reassociation_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_REASSOCREQ;
-					}
-					else if (strcmp(frame_name, "reassociation_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_REASSOCRES;
-					}
-					else if (strcmp(frame_name, "probe_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PROBEREQ;
-					}
-					else if (strcmp(frame_name, "probe_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PROBERES;
-					}
-					else if (strcmp(frame_name, "timing_advertisement") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_TIMADVERT;
-					}
-					else if (strcmp(frame_name, "reserved_000111") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_000111;
-					}
-					else if (strcmp(frame_name, "beacon") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BEACON;
-					}
-					else if (strcmp(frame_name, "atim") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ATIM;
-					}
-					else if (strcmp(frame_name, "disassociation") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DISASSOC;
-					}
-					else if (strcmp(frame_name, "authentication") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_AUTH;
-					}
-					else if (strcmp(frame_name, "deauthentication") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DEAUTH;
-					}
-					else if (strcmp(frame_name, "action") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACTION;
-					}
-					else if (strcmp(frame_name, "action_no_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACTIONNOACK;
-					}
-					else if (strcmp(frame_name, "reserved_001111") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_001111;
-					} // data
-					else if (strcmp(frame_name, "data") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATA;
-					}
-					else if (strcmp(frame_name, "data_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFACK;
-					}
-					else if (strcmp(frame_name, "data_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFPOLL;
-					}
-					else if (strcmp(frame_name, "data_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFACKPOLL;
-					}
-					else if (strcmp(frame_name, "null") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_NULL;
-					}
-					else if (strcmp(frame_name, "cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFACK;
-					}
-					else if (strcmp(frame_name, "cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFPOLL;
-					}
-					else if (strcmp(frame_name, "cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFACKPOLL;
-					}
-					else if (strcmp(frame_name, "qos_data") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATA;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFACK;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFPOLL;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFACKPOLL;
-					}
-					else if (strcmp(frame_name, "qos_null") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSNULL;
-					}
-					else if (strcmp(frame_name, "qos_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFACK;
-					}
-					else if (strcmp(frame_name, "qos_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFPOLL;
-					}
-					else if (strcmp(frame_name, "qos_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFACKPOLL;
-					} // control
-					else if (strcmp(frame_name, "reserved_010000") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010000;
-					}
-					else if (strcmp(frame_name, "reserved_010001") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010001;
-					}
-					else if (strcmp(frame_name, "reserved_010010") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010010;
-					}
-					else if (strcmp(frame_name, "reserved_010011") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010011;
-					}
-					else if (strcmp(frame_name, "beamforming_report_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BEAMFORMING;
-					}
-					else if (strcmp(frame_name, "vht_ndp_announcement") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_VHT;
-					}
-					else if (strcmp(frame_name, "control_frame_extension") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTRLFRMEXT;
-					}
-					else if (strcmp(frame_name, "control_wrapper") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTRLWRAP;
-					}
-					else if (strcmp(frame_name, "block_ack_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BLOCKACKREQ;
-					}
-					else if (strcmp(frame_name, "block_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BLOCKACK;
-					}
-					else if (strcmp(frame_name, "ps_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PSPOLL;
-					}
-					else if (strcmp(frame_name, "rts") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_RTS;
-					}
-					else if (strcmp(frame_name, "cts") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTS;
-					}
-					else if (strcmp(frame_name, "ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACK;
-					}
-					else if (strcmp(frame_name, "cf_end") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFEND;
-					}
-					else if (strcmp(frame_name, "cf_end_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFENDACK;
-					}
-				}
-			}
-		}
-	}
-	*frame_cnt = frm_idx;
-
-	fclose(fp1);
-	return 0;
+    FILE *fp = owfuzz_config_open(cfg_file);
+    char buf[256], name[64], heading[64];
+    uint32_t n = 0;
+    int enabled, in_section = 0;
+    if (!fp || !frames || !count) { if (fp) fclose(fp); return -1; }
+    *count = 0;
+    while (fgets(buf, sizeof(buf), fp)) {
+        if (buf[0] == '[') {
+            in_section = sscanf(buf, "[%63[^]]]", heading) == 1 && !strcmp(heading, section);
+            continue;
+        }
+        if (!in_section || buf[0] == '#' || buf[0] == '\n') continue;
+        if (sscanf(buf, "%63[^=]=%d", name, &enabled) != 2 || enabled != 1) continue;
+        const struct ow_wifi_frame *frame = ow_wifi_find_name(name);
+        if (!frame || n >= 64) {
+            fuzz_logger_log(FUZZ_LOG_ERR, "Unknown/unsupported frame or frame limit: %s", name);
+            fclose(fp);
+            return -1;
+        }
+        frames[n++] = frame->id;
+    }
+    if (ferror(fp)) { fclose(fp); return -1; }
+    fclose(fp);
+    *count = n;
+    return 0;
 }
-
-/*
-	Pull from the owfuzz.cfg file the [ap-frames] settings
-*/
-int owfuzz_config_get_ap_frames(char *cfg_file, uint8_t *owfuzz_frames, uint32_t *frame_cnt)
-{
-	FILE *fp1;
-	char buf[256] = {0};
-	char frame_name[64] = {0};
-	int rc = 0, onoff;
-	int frm_idx = 0;
-
-	fp1 = owfuzz_config_open(NULL);
-	if (fp1 == NULL)
-	{
-		fuzz_logger_log(FUZZ_LOG_ERR, "Failed to open '%s'.", NULL == cfg_file ? "owfuzz.cfg" : cfg_file);
-		return -1;
-	}
-
-	while (!feof(fp1))
-	{
-		memset(buf, 0, sizeof(buf));
-		if (fgets(buf, sizeof(buf), fp1))
-		{
-			if (buf[0] == '#' || buf[0] == '\r' || buf[0] == '\n')
-				continue;
-
-			if (buf[0] == '[')
-			{
-				if (strstr(buf, "[ap-frames]") && (rc == 0))
-				{
-					rc = 1;
-					continue;
-				}
-				else
-				{
-					if (rc == 1)
-					{
-						rc = 0;
-						break;
-					}
-					else
-						continue;
-				}
-			}
-
-			if (rc)
-			{
-				onoff = 0;
-				sscanf(buf, "%[^=]=%d", frame_name, &onoff);
-				if (onoff == 1)
-				{
-					// printf("%s\n", frame_name);
-					// management
-					if (strcmp(frame_name, "association_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ASSOCREQ;
-					}
-					else if (strcmp(frame_name, "association_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ASSOCRES;
-					}
-					else if (strcmp(frame_name, "reassociation_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_REASSOCREQ;
-					}
-					else if (strcmp(frame_name, "reassociation_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_REASSOCRES;
-					}
-					else if (strcmp(frame_name, "probe_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PROBEREQ;
-					}
-					else if (strcmp(frame_name, "probe_response") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PROBERES;
-					}
-					else if (strcmp(frame_name, "timing_advertisement") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_TIMADVERT;
-					}
-					else if (strcmp(frame_name, "reserved_000111") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_000111;
-					}
-					else if (strcmp(frame_name, "beacon") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BEACON;
-					}
-					else if (strcmp(frame_name, "atim") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ATIM;
-					}
-					else if (strcmp(frame_name, "disassociation") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DISASSOC;
-					}
-					else if (strcmp(frame_name, "authentication") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_AUTH;
-					}
-					else if (strcmp(frame_name, "deauthentication") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DEAUTH;
-					}
-					else if (strcmp(frame_name, "action") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACTION;
-					}
-					else if (strcmp(frame_name, "action_no_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACTIONNOACK;
-					}
-					else if (strcmp(frame_name, "reserved_001111") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_001111;
-					} // data
-					else if (strcmp(frame_name, "data") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATA;
-					}
-					else if (strcmp(frame_name, "data_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFACK;
-					}
-					else if (strcmp(frame_name, "data_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFPOLL;
-					}
-					else if (strcmp(frame_name, "data_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_DATACFACKPOLL;
-					}
-					else if (strcmp(frame_name, "null") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_NULL;
-					}
-					else if (strcmp(frame_name, "cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFACK;
-					}
-					else if (strcmp(frame_name, "cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFPOLL;
-					}
-					else if (strcmp(frame_name, "cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFACKPOLL;
-					}
-					else if (strcmp(frame_name, "qos_data") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATA;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFACK;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFPOLL;
-					}
-					else if (strcmp(frame_name, "qos_data_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSDATACFACKPOLL;
-					}
-					else if (strcmp(frame_name, "qos_null") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSNULL;
-					}
-					else if (strcmp(frame_name, "qos_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFACK;
-					}
-					else if (strcmp(frame_name, "qos_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFPOLL;
-					}
-					else if (strcmp(frame_name, "qos_cf_ack_cf_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_QOSCFACKPOLL;
-					} // control
-					else if (strcmp(frame_name, "reserved_010000") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010000;
-					}
-					else if (strcmp(frame_name, "reserved_010001") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010001;
-					}
-					else if (strcmp(frame_name, "reserved_010010") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010010;
-					}
-					else if (strcmp(frame_name, "reserved_010011") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_010011;
-					}
-					else if (strcmp(frame_name, "beamforming_report_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BEAMFORMING;
-					}
-					else if (strcmp(frame_name, "vht_ndp_announcement") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_VHT;
-					}
-					else if (strcmp(frame_name, "control_frame_extension") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTRLFRMEXT;
-					}
-					else if (strcmp(frame_name, "control_wrapper") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTRLWRAP;
-					}
-					else if (strcmp(frame_name, "block_ack_request") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BLOCKACKREQ;
-					}
-					else if (strcmp(frame_name, "block_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_BLOCKACK;
-					}
-					else if (strcmp(frame_name, "ps_poll") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_PSPOLL;
-					}
-					else if (strcmp(frame_name, "rts") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_RTS;
-					}
-					else if (strcmp(frame_name, "cts") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CTS;
-					}
-					else if (strcmp(frame_name, "ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_ACK;
-					}
-					else if (strcmp(frame_name, "cf_end") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFEND;
-					}
-					else if (strcmp(frame_name, "cf_end_cf_ack") == 0)
-					{
-						owfuzz_frames[frm_idx++] = IEEE80211_TYPE_CFENDACK;
-					}
-				}
-			}
-		}
-	}
-	*frame_cnt = frm_idx;
-
-	fclose(fp1);
-	return 0;
-}
+int owfuzz_config_get_sta_frames(char *cfg_file, uint8_t *frames, uint32_t *count)
+{ return owfuzz_config_get_frames(cfg_file, "sta-frames", frames, count); }
+int owfuzz_config_get_ap_frames(char *cfg_file, uint8_t *frames, uint32_t *count)
+{ return owfuzz_config_get_frames(cfg_file, "ap-frames", frames, count); }
 
 /*
 	Pull the [interfaces] information from the owfuzz.cfg file

@@ -440,8 +440,11 @@ void generate_random_data(uint8_t *data, uint32_t length, FUZZING_VALUE_TYPE val
 		return;
 	}
 
-	gettimeofday(&t, NULL);
-	srandom(t.tv_usec);
+	if (0 == fuzzing_opt.seed)
+	{
+		gettimeofday(&t, NULL);
+		srandom(t.tv_usec);
+	}
 	A = random() % 256;
 
 	for (i = 0; i < length; i++)
@@ -456,15 +459,21 @@ void generate_random_data(uint8_t *data, uint32_t length, FUZZING_VALUE_TYPE val
 		}
 		else if (value_type == VALUE_RANDOM)
 		{
-			memset(&t, 0, sizeof(t));
-			gettimeofday(&t, NULL);
-			srandom(t.tv_usec + *(data + i - 1));
+			if (0 == fuzzing_opt.seed)
+			{
+				gettimeofday(&t, NULL);
+				/* The first byte has no preceding byte in this buffer. */
+				srandom(t.tv_usec + (i ? data[i - 1] : 0));
+			}
 			*(data + i) = random() % 256;
 		}
 		else if (value_type == VALUE_A)
 		{
-			gettimeofday(&t, NULL);
-			srandom(t.tv_usec);
+			if (0 == fuzzing_opt.seed)
+			{
+				gettimeofday(&t, NULL);
+				srandom(t.tv_usec);
+			}
 			*(data + i) = A;
 		}
 	}

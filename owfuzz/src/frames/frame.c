@@ -22,6 +22,7 @@
 #include <ctype.h>
 #include "ieee80211_def.h"
 #include "frame.h"
+#include "legacy_registry.h"
 #include "osdep_wifi_transmit.h"
 #include "./management/ies_creator.h"
 #include "../common/log.h"
@@ -30,322 +31,25 @@ extern fuzzing_option fuzzing_opt;
 
 const char *return_frame_type(uint8_t frame_type)
 {
-	switch (frame_type)
-	{
-	// management
-	case IEEE80211_TYPE_ASSOCRES: // AP
-		return "IEEE80211_TYPE_ASSOCRES";
-	case IEEE80211_TYPE_REASSOCRES:
-		return "IEEE80211_TYPE_REASSOCRES";
-	case IEEE80211_TYPE_PROBERES:
-		return "IEEE80211_TYPE_PROBERES";
-	case IEEE80211_TYPE_TIMADVERT:
-		return "IEEE80211_TYPE_TIMADVERT";
-	case IEEE80211_TYPE_BEACON:
-		return "IEEE80211_TYPE_BEACON";
-	case IEEE80211_TYPE_ATIM: // xx
-		return "IEEE80211_TYPE_ATIM";
-	case IEEE80211_TYPE_DISASSOC:
-		return "IEEE80211_TYPE_DISASSOC";
-	case IEEE80211_TYPE_DEAUTH:
-		return "IEEE80211_TYPE_DEAUTH";
-	case IEEE80211_TYPE_ACTION:
-		return "IEEE80211_TYPE_ACTION";
-	case IEEE80211_TYPE_ACTIONNOACK:
-		return "IEEE80211_TYPE_ACTIONNOACK";
-	case IEEE80211_TYPE_ASSOCREQ: // STA
-		return "IEEE80211_TYPE_ASSOCREQ";
-	case IEEE80211_TYPE_REASSOCREQ:
-		return "IEEE80211_TYPE_REASSOCREQ";
-	case IEEE80211_TYPE_PROBEREQ:
-		return "IEEE80211_TYPE_PROBEREQ";
-	case IEEE80211_TYPE_AUTH:
-		return "IEEE80211_TYPE_AUTH";
-
-	// control
-	case IEEE80211_TYPE_ACK:
-		return "IEEE80211_TYPE_ACK";
-	case IEEE80211_TYPE_BEAMFORMING:
-		return "IEEE80211_TYPE_BEAMFORMING";
-	case IEEE80211_TYPE_VHT:
-		return "IEEE80211_TYPE_VHT";
-	case IEEE80211_TYPE_CTRLFRMEXT:
-		return "IEEE80211_TYPE_CTRLFRMEXT";
-	case IEEE80211_TYPE_CTRLWRAP:
-		return "IEEE80211_TYPE_CTRLWRAP";
-	case IEEE80211_TYPE_BLOCKACKREQ:
-		return "IEEE80211_TYPE_BLOCKACKREQ";
-	case IEEE80211_TYPE_BLOCKACK:
-		return "IEEE80211_TYPE_BLOCKACK";
-	case IEEE80211_TYPE_PSPOLL:
-		return "IEEE80211_TYPE_PSPOLL";
-	case IEEE80211_TYPE_RTS:
-		return "IEEE80211_TYPE_RTS";
-	case IEEE80211_TYPE_CTS:
-		return "IEEE80211_TYPE_CTS";
-	case IEEE80211_TYPE_CFEND:
-		return "IEEE80211_TYPE_CFEND";
-	case IEEE80211_TYPE_CFENDACK:
-		return "IEEE80211_TYPE_CFENDACK";
-
-	// data
-	case IEEE80211_TYPE_QOSDATA:
-		return "IEEE80211_TYPE_QOSDATA";
-	case IEEE80211_TYPE_DATA:
-		return "IEEE80211_TYPE_DATA";
-	case IEEE80211_TYPE_DATACFACK:
-		return "IEEE80211_TYPE_DATACFACK";
-	case IEEE80211_TYPE_DATACFPOLL:
-		return "IEEE80211_TYPE_DATACFPOLL";
-	case IEEE80211_TYPE_DATACFACKPOLL:
-		return "IEEE80211_TYPE_DATACFACKPOLL";
-	case IEEE80211_TYPE_NULL:
-		return "IEEE80211_TYPE_NULL";
-	case IEEE80211_TYPE_CFACK:
-		return "IEEE80211_TYPE_CFACK";
-	case IEEE80211_TYPE_CFPOLL:
-		return "IEEE80211_TYPE_CFPOLL";
-	case IEEE80211_TYPE_CFACKPOLL:
-		return "IEEE80211_TYPE_CFACKPOLL";
-	case IEEE80211_TYPE_QOSDATACFACK:
-		return "IEEE80211_TYPE_QOSDATACFACK";
-	case IEEE80211_TYPE_QOSDATACFPOLL:
-		return "IEEE80211_TYPE_QOSDATACFPOLL";
-	case IEEE80211_TYPE_QOSDATACFACKPOLL:
-		return "IEEE80211_TYPE_QOSDATACFACKPOLL";
-	case IEEE80211_TYPE_QOSNULL:
-		return "IEEE80211_TYPE_QOSNULL";
-	case IEEE80211_TYPE_QOSCFACK:
-		return "IEEE80211_TYPE_QOSCFACK";
-	case IEEE80211_TYPE_QOSCFPOLL:
-		return "IEEE80211_TYPE_QOSCFPOLL";
-	case IEEE80211_TYPE_QOSCFACKPOLL:
-		return "IEEE80211_TYPE_QOSCFACKPOLL";
-
-	// extension
-	case IEEE80211_TYPE_DMGBEACON:
-		return "IEEE80211_TYPE_DMGBEACON";
-	}
-
-	return "UNKNOWN";
+    const struct ow_wifi_frame *frame = ow_wifi_find_id(frame_type);
+    return frame ? frame->symbol : "UNKNOWN";
 }
-
-/*
-	Return a pkt frame - fuzzed
-*/
-struct packet get_frame(uint8_t frame_type, struct ether_addr bssid, struct ether_addr smac, struct ether_addr dmac, struct packet *recv_pkt)
+struct packet get_frame(uint8_t frame_type, struct ether_addr bssid, struct ether_addr smac,
+                        struct ether_addr dmac, struct packet *recv_pkt)
 {
-	struct packet pkt = {0};
-
-	// fuzzing_opt.fuzz_pkt_num++;
-	if (recv_pkt)
-	{
-		pkt.channel = recv_pkt->channel;
-	}
-
-	fuzzing_opt.current_frame = frame_type;
-
-	// fuzz_logger_log(FUZZ_LOG_INFO, "[%s:%d] frame_type: %x (%s)", __FILE__, __LINE__, frame_type, return_frame_type(frame_type));
-	switch (frame_type)
-	{
-	// management
-	case IEEE80211_TYPE_ASSOCRES: // AP
-		pkt = create_association_response(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_REASSOCRES:
-		pkt = create_reassociation_response(bssid, dmac, 0);
-		break;
-	case IEEE80211_TYPE_PROBERES:
-		if (recv_pkt)
-			pkt = create_probe_response(bssid, dmac, 0, NULL, recv_pkt->data + sizeof(struct ieee_hdr), recv_pkt->len - sizeof(struct ieee_hdr));
-		else
-			pkt = create_probe_response(bssid, dmac, 0, NULL, NULL, 0);
-		break;
-	case IEEE80211_TYPE_TIMADVERT:
-		pkt = create_timing_advertisement(bssid, dmac, 0);
-		break;
-	case IEEE80211_TYPE_BEACON:
-		pkt = create_beacon(bssid, 0, NULL);
-		break;
-	case IEEE80211_TYPE_ATIM: // xx
-		pkt = create_atim(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DISASSOC:
-		pkt = create_disassociation(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DEAUTH:
-		pkt = create_deauthentication(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_ACTION:
-		pkt = create_action(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_ACTIONNOACK:
-		pkt = create_action_no_ack(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_ASSOCREQ: // STA
-		pkt = create_association_request(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_REASSOCREQ:
-		pkt = create_reassociation_request(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_PROBEREQ:
-		pkt = create_probe_request(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_AUTH:
-		pkt = create_authentication(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	// control
-	case IEEE80211_TYPE_ACK:
-		pkt = create_ack(dmac);
-		break;
-	case IEEE80211_TYPE_BEAMFORMING:
-		pkt = create_beamforming_report_poll(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_VHT:
-		pkt = create_vht_ndp_announcement(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_CTRLFRMEXT:
-		pkt = create_control_frame_extension(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_CTRLWRAP:
-		pkt = create_control_wrapper(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_BLOCKACKREQ:
-		pkt = create_block_ack_request(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_BLOCKACK:
-		pkt = create_block_ack(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_PSPOLL:
-		pkt = create_ps_poll(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_RTS:
-		pkt = create_rts(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_CTS:
-		pkt = create_cts(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_CFEND:
-		pkt = create_cf_end(bssid, smac, dmac);
-		break;
-	case IEEE80211_TYPE_CFENDACK:
-		pkt = create_cf_end_cf_ack(bssid, smac, dmac);
-		break;
-	// data
-	case IEEE80211_TYPE_QOSDATA:
-		pkt = create_qos_data(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DATA:
-		pkt = create_data(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DATACFACK:
-		pkt = create_data_cf_ack(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DATACFPOLL:
-		pkt = create_data_cf_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DATACFACKPOLL:
-		pkt = create_data_cf_ack_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_NULL:
-		pkt = create_data_null(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_CFACK:
-		pkt = create_d_cf_ack(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_CFPOLL:
-		pkt = create_d_cf_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_CFACKPOLL:
-		pkt = create_d_cf_ack_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSDATACFACK:
-		pkt = create_qos_data_cf_ack(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSDATACFPOLL:
-		pkt = create_qos_data_cf_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSDATACFACKPOLL:
-		pkt = create_qos_data_cf_ack_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSNULL:
-		pkt = create_qos_null(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSCFACK:
-		pkt = create_qos_cf_ack(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSCFPOLL:
-		pkt = create_qos_cf_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_QOSCFACKPOLL:
-		pkt = create_qos_cf_ack_poll(bssid, smac, dmac, 0, recv_pkt);
-		break;
-	// extension
-	case IEEE80211_TYPE_DMGBEACON:
-		break;
-	default:
-		break;
-	}
-
-	return pkt;
+    const struct ow_wifi_frame *frame = ow_wifi_find_id(frame_type);
+    struct packet pkt = {0};
+    fuzzing_opt.current_frame = frame_type;
+    if (frame) pkt = frame->build(bssid, smac, dmac, recv_pkt);
+    return pkt;
 }
-
-struct packet get_default_frame(uint8_t frame_type, struct ether_addr bssid, struct ether_addr smac, struct ether_addr dmac, struct packet *recv_pkt)
+struct packet get_default_frame(uint8_t frame_type, struct ether_addr bssid, struct ether_addr smac,
+                                struct ether_addr dmac, struct packet *recv_pkt)
 {
-	struct packet pkt = {0};
-	struct ieee_hdr *hdr;
-
-	switch (frame_type)
-	{
-	// management
-	case IEEE80211_TYPE_ASSOCRES: // AP
-		pkt = create_ap_association_response(bssid, smac, dmac, 0);
-		break;
-	case IEEE80211_TYPE_REASSOCRES:
-		// pkt = create_reassociation_response(bssid, dmac, 0);
-		break;
-	case IEEE80211_TYPE_PROBERES:
-		hdr = (struct ieee_hdr *)recv_pkt->data;
-		if (hdr->type == IEEE80211_TYPE_PROBEREQ)
-		{
-			// pkt = create_probe_response(bssid, dmac, 0, NULL, recv_pkt->data + sizeof(struct ieee_hdr), recv_pkt->len - sizeof(struct ieee_hdr));
-		}
-		break;
-	case IEEE80211_TYPE_TIMADVERT:
-		// pkt = create_timing_advertisement(bssid, dmac, 0);
-		break;
-	case IEEE80211_TYPE_BEACON:
-		pkt = create_ap_beacon(bssid, 0, fuzzing_opt.auth_type);
-		break;
-	case IEEE80211_TYPE_ATIM: // xx
-		break;
-	case IEEE80211_TYPE_DISASSOC:
-		// pkt = create_disassociation(bssid, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_DEAUTH:
-		// pkt = create_deauthentication(bssid, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_ACTION:
-		// pkt = create_action(bssid, dmac, 0, recv_pkt);
-		break;
-	case IEEE80211_TYPE_ACTIONNOACK:
-		break;
-	case IEEE80211_TYPE_ASSOCREQ: // STA
-		break;
-	case IEEE80211_TYPE_REASSOCREQ:
-		break;
-	case IEEE80211_TYPE_PROBEREQ:
-		break;
-	case IEEE80211_TYPE_AUTH:
-		// pkt = create_authentication(bssid, dmac, 0);
-		break;
-	// control
-	// data
-	default:
-		break;
-	}
-
-	return pkt;
+    const struct ow_wifi_frame *frame = ow_wifi_find_id(frame_type);
+    struct packet pkt = {0};
+    if (frame && frame->baseline) pkt = frame->baseline(bssid, smac, dmac, recv_pkt);
+    return pkt;
 }
 
 unsigned short calc_chksum(unsigned short *buff, int len)
@@ -643,20 +347,9 @@ int check_alive_by_pkts(struct ether_addr smac)
 */
 void save_fuzzing_state()
 {
-	save_action_state();
-	save_action_no_ack_state();
-	save_association_request_state();
-	save_association_response_state();
-	save_atim_state();
-	save_authentication_state();
-	save_beacon_state();
-	save_deauthentication_state();
-	save_disassociation_state();
-	save_probe_request_state();
-	save_probe_response_state();
-	save_reassociation_request_state();
-	save_reassociation_response_state();
-	save_timing_advertisement_state();
+    size_t i;
+    for (i = 0; i < ow_wifi_frame_count; i++)
+        if (ow_wifi_frames[i].save) ow_wifi_frames[i].save();
 }
 
 /*
@@ -664,20 +357,9 @@ void save_fuzzing_state()
 */
 void load_fuzzing_state()
 {
-	load_action_state();
-	load_action_no_ack_state();
-	load_association_request_state();
-	load_association_response_state();
-	load_atim_state();
-	load_authentication_state();
-	load_beacon_state();
-	load_deauthentication_state();
-	load_disassociation_state();
-	load_probe_request_state();
-	load_probe_response_state();
-	load_reassociation_request_state();
-	load_reassociation_response_state();
-	load_timing_advertisement_state();
+    size_t i;
+    for (i = 0; i < ow_wifi_frame_count; i++)
+        if (ow_wifi_frames[i].load) ow_wifi_frames[i].load();
 }
 
 /*

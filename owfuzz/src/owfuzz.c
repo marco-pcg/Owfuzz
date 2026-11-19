@@ -19,8 +19,10 @@
 
 #include <stdio.h>
 #include "fuzz_control.h"
+#include "protocols/protocol.h"
 
 int main(int argc, char *argv[])
 {
-	return fuzzing(argc, argv);
+	int status = ow_protocol_cli(argc, argv);
+	return status == -2 ? fuzzing(argc, argv) : status;
 }

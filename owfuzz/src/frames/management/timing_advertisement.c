@@ -57,7 +57,7 @@ struct packet create_timing_advertisement(struct ether_addr bssid, struct ether_
 	MAC_SET_BCAST(bc);
 	create_ieee_hdr(&timing_advertisement, IEEE80211_TYPE_TIMADVERT, 'a', 0, bc, bssid, bssid, SE_NULLMAC, 0);
 
-	taf = (struct beacon_fixed *)(timing_advertisement.data + timing_advertisement.len);
+	taf = (struct timing_advertisement_fixed *)(timing_advertisement.data + timing_advertisement.len);
 	internal_timestamp += 0x400 * 0x64;
 	taf->timestamp = htole64(internal_timestamp);
 	taf->capabilities = 0x0000;
