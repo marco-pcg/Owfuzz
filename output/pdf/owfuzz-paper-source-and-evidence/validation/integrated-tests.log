@@ -1,0 +1,72 @@
+make: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz'
+make[1]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/control'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/control'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/trans'
+Building for Linux
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/trans'
+ar crvs libosdep.a  osdep_wifi_transmit.o ./osdep/osdep.o ./osdep/network.o ./osdep/file.o ./osdep/linux.o ./osdep/linux_tap.o ./osdep/radiotap/radiotap.o ./osdep/common.o
+r - osdep_wifi_transmit.o
+r - ./osdep/osdep.o
+r - ./osdep/network.o
+r - ./osdep/file.o
+r - ./osdep/linux.o
+r - ./osdep/linux_tap.o
+r - ./osdep/radiotap/radiotap.o
+r - ./osdep/common.o
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/trans'
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi/trans'
+make[1]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/linux_wifi'
+make[1]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/control'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/control'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/data'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/data'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/management'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/management'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/extension'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames/extension'
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/frames'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/common'
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/common'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures'
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mesh'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mesh'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/direct'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/direct'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/awdl'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/awdl'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mac'
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mac'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mlme'
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mlme'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mesh'
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/mesh'
+make[3]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/fast_bss_trans'
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+ls: cannot access '*.c': No such file or directory
+make[3]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures/fast_bss_trans'
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/procedures'
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/protocols'
+python3 ../../../tools/generate_protocol_registry.py generated_registry.c modules/ethernet.c modules/wifi_be.c modules/wifi_legacy.c
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/protocols'
+make owfuzz
+make[2]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src'
+make[2]: 'owfuzz' is up to date.
+make[2]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src'
+make[1]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src'
+python3 src/protocols/test_integrated.py src/owfuzz
+Full executable: 41 real legacy builders, known empty stub, and reproducible new-family campaigns passed
+make: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz'

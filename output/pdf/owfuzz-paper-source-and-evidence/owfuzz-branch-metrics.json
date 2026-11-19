@@ -1,0 +1,4536 @@
+{
+  "analyzer": "Lizard 1.24.1",
+  "scope": "Tracked production C under owfuzz/src; excludes hostapd_lib, tests, protocol test files, fixtures and generated registry. Includes relocated adapters and protocol core. Excludes linux_wifi backends and Python tooling.",
+  "baseline": {
+    "commit": "10af304243829852b989278e962099a885bd9533",
+    "files": [
+      {
+        "path": "owfuzz/src/common/config.c",
+        "nloc": 1008,
+        "physical_lines": 1135
+      },
+      {
+        "path": "owfuzz/src/common/log.c",
+        "nloc": 52,
+        "physical_lines": 85
+      },
+      {
+        "path": "owfuzz/src/common/mac_addr.c",
+        "nloc": 144,
+        "physical_lines": 185
+      },
+      {
+        "path": "owfuzz/src/common/pcap_log.c",
+        "nloc": 51,
+        "physical_lines": 83
+      },
+      {
+        "path": "owfuzz/src/common/queue.c",
+        "nloc": 54,
+        "physical_lines": 67
+      },
+      {
+        "path": "owfuzz/src/frames/80211_packet_common.c",
+        "nloc": 433,
+        "physical_lines": 542
+      },
+      {
+        "path": "owfuzz/src/frames/control/acknowledgement.c",
+        "nloc": 21,
+        "physical_lines": 51
+      },
+      {
+        "path": "owfuzz/src/frames/control/beamforming_report_poll.c",
+        "nloc": 18,
+        "physical_lines": 46
+      },
+      {
+        "path": "owfuzz/src/frames/control/block_ack.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/block_ack_request.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/cf_end.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/cf_end_cf_ack.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/control_frame_extension.c",
+        "nloc": 6,
+        "physical_lines": 27
+      },
+      {
+        "path": "owfuzz/src/frames/control/control_wrapper.c",
+        "nloc": 17,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/cts.c",
+        "nloc": 17,
+        "physical_lines": 43
+      },
+      {
+        "path": "owfuzz/src/frames/control/ps_poll.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/rts.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/vht_ndp_announcement.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 41
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data.c",
+        "nloc": 220,
+        "physical_lines": 274
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_null.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data.c",
+        "nloc": 732,
+        "physical_lines": 985
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_null.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/extension/dmg_beacon.c",
+        "nloc": 1,
+        "physical_lines": 20
+      },
+      {
+        "path": "owfuzz/src/frames/frame.c",
+        "nloc": 771,
+        "physical_lines": 958
+      },
+      {
+        "path": "owfuzz/src/frames/management/action.c",
+        "nloc": 809,
+        "physical_lines": 1492
+      },
+      {
+        "path": "owfuzz/src/frames/management/action_no_ack.c",
+        "nloc": 17,
+        "physical_lines": 41
+      },
+      {
+        "path": "owfuzz/src/frames/management/association_request.c",
+        "nloc": 137,
+        "physical_lines": 195
+      },
+      {
+        "path": "owfuzz/src/frames/management/association_response.c",
+        "nloc": 131,
+        "physical_lines": 197
+      },
+      {
+        "path": "owfuzz/src/frames/management/atim.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/management/authentication.c",
+        "nloc": 184,
+        "physical_lines": 304
+      },
+      {
+        "path": "owfuzz/src/frames/management/beacon.c",
+        "nloc": 269,
+        "physical_lines": 375
+      },
+      {
+        "path": "owfuzz/src/frames/management/deauthentication.c",
+        "nloc": 25,
+        "physical_lines": 56
+      },
+      {
+        "path": "owfuzz/src/frames/management/disassociation.c",
+        "nloc": 25,
+        "physical_lines": 56
+      },
+      {
+        "path": "owfuzz/src/frames/management/ies_common.c",
+        "nloc": 1,
+        "physical_lines": 20
+      },
+      {
+        "path": "owfuzz/src/frames/management/ies_creator.c",
+        "nloc": 1668,
+        "physical_lines": 2588
+      },
+      {
+        "path": "owfuzz/src/frames/management/probe_request.c",
+        "nloc": 107,
+        "physical_lines": 159
+      },
+      {
+        "path": "owfuzz/src/frames/management/probe_response.c",
+        "nloc": 138,
+        "physical_lines": 194
+      },
+      {
+        "path": "owfuzz/src/frames/management/reassociation_request.c",
+        "nloc": 78,
+        "physical_lines": 127
+      },
+      {
+        "path": "owfuzz/src/frames/management/reassociation_response.c",
+        "nloc": 70,
+        "physical_lines": 126
+      },
+      {
+        "path": "owfuzz/src/frames/management/timing_advertisement.c",
+        "nloc": 52,
+        "physical_lines": 102
+      },
+      {
+        "path": "owfuzz/src/fuzz_control.c",
+        "nloc": 2674,
+        "physical_lines": 3337
+      },
+      {
+        "path": "owfuzz/src/hashtable.c",
+        "nloc": 99,
+        "physical_lines": 139
+      },
+      {
+        "path": "owfuzz/src/owfuzz.c",
+        "nloc": 6,
+        "physical_lines": 26
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/awdl.c",
+        "nloc": 66,
+        "physical_lines": 91
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "nloc": 99,
+        "physical_lines": 146
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/wire.c",
+        "nloc": 210,
+        "physical_lines": 262
+      },
+      {
+        "path": "owfuzz/src/procedures/direct/direct.c",
+        "nloc": 1270,
+        "physical_lines": 1646
+      },
+      {
+        "path": "owfuzz/src/procedures/mesh/mesh.c",
+        "nloc": 89,
+        "physical_lines": 132
+      }
+    ],
+    "functions": [
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_open",
+        "nloc": 25,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_sta_frames",
+        "nloc": 245,
+        "ccn": 62
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ap_frames",
+        "nloc": 244,
+        "ccn": 62
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_interfaces",
+        "nloc": 51,
+        "ccn": 14
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_channels",
+        "nloc": 51,
+        "ccn": 13
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_macs",
+        "nloc": 62,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_fuzzing_option",
+        "nloc": 187,
+        "ccn": 45
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ies_status",
+        "nloc": 56,
+        "ccn": 15
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ext_ies_status",
+        "nloc": 56,
+        "ccn": 15
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_add_virtual_interface",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_del_virtual_interface",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_change_interface_mac",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_init",
+        "nloc": 9,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_log",
+        "nloc": 28,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_cleanup",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "parse_mac",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "parse_half_mac",
+        "nloc": 15,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "generate_valid_mac",
+        "nloc": 32,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "generate_mac",
+        "nloc": 12,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "increase_mac_adress",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "get_next_mac",
+        "nloc": 48,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "print_mac",
+        "nloc": 5,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "open_pcap",
+        "nloc": 26,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "write_pcap",
+        "nloc": 13,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "close_pcap",
+        "nloc": 8,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_init",
+        "nloc": 6,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_empty",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_push",
+        "nloc": 19,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_pop",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_destroy",
+        "nloc": 10,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "print_options",
+        "nloc": 58,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "create_ieee_hdr",
+        "nloc": 76,
+        "ccn": 19
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "increase_seqno",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_seqno",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_fragno",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_next_seqno",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "set_seqno",
+        "nloc": 15,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "set_fragno",
+        "nloc": 12,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_addr",
+        "nloc": 49,
+        "ccn": 10
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_bssid",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_source",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_destination",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_transmitter",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_receiver",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_elemet",
+        "nloc": 70,
+        "ccn": 20
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "generate_random_data",
+        "nloc": 37,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "ntohll",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "htonll",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "dumphex",
+        "nloc": 13,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "print_interaction_status",
+        "nloc": 28,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/frames/control/acknowledgement.c",
+        "name": "create_ack",
+        "nloc": 20,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/beamforming_report_poll.c",
+        "name": "create_beamforming_report_poll",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/block_ack.c",
+        "name": "create_block_ack",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/block_ack_request.c",
+        "name": "create_block_ack_request",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cf_end.c",
+        "name": "create_cf_end",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cf_end_cf_ack.c",
+        "name": "create_cf_end_cf_ack",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/control_frame_extension.c",
+        "name": "create_control_frame_extension",
+        "nloc": 5,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/control_wrapper.c",
+        "name": "create_control_wrapper",
+        "nloc": 16,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cts.c",
+        "name": "create_cts",
+        "nloc": 16,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/ps_poll.c",
+        "name": "create_ps_poll",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/rts.c",
+        "name": "create_rts",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/vht_ndp_announcement.c",
+        "name": "create_vht_ndp_announcement",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_ack.c",
+        "name": "create_d_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_ack_poll.c",
+        "name": "create_d_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_poll.c",
+        "name": "create_d_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data.c",
+        "name": "create_data",
+        "nloc": 213,
+        "ccn": 44
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_ack.c",
+        "name": "create_data_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_ack_poll.c",
+        "name": "create_data_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_poll.c",
+        "name": "create_data_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_null.c",
+        "name": "create_data_null",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_ack.c",
+        "name": "create_qos_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_ack_poll.c",
+        "name": "create_qos_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_poll.c",
+        "name": "create_qos_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_qos_data",
+        "nloc": 264,
+        "ccn": 69
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m1",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m2",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m3",
+        "nloc": 117,
+        "ccn": 17
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m4",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_ack.c",
+        "name": "create_qos_data_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_ack_poll.c",
+        "name": "create_qos_data_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_poll.c",
+        "name": "create_qos_data_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_null.c",
+        "name": "create_qos_null",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "return_frame_type",
+        "nloc": 93,
+        "ccn": 44
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "get_frame",
+        "nloc": 146,
+        "ccn": 46
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "get_default_frame",
+        "nloc": 45,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "calc_chksum",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "pack_icmp",
+        "nloc": 18,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "tv_sub",
+        "nloc": 9,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "unpack_icmp",
+        "nloc": 23,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "init_ping_sock",
+        "nloc": 35,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_ping",
+        "nloc": 57,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_deauth",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_disassoc",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_pkts",
+        "nloc": 19,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "save_fuzzing_state",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "load_fuzzing_state",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "hex_to_ascii",
+        "nloc": 23,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "hex_to_ascii_hex",
+        "nloc": 25,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "str_to_hex",
+        "nloc": 27,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "log_pkt",
+        "nloc": 165,
+        "ccn": 49
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "save_action_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "load_action_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "create_action",
+        "nloc": 134,
+        "ccn": 54
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "create_action_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_spectrum",
+        "nloc": 22,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_qos",
+        "nloc": 24,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_dls",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_block_ack",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_public",
+        "nloc": 56,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_radio_measurement",
+        "nloc": 24,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_ft",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_ht",
+        "nloc": 25,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_sa_query",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_protected_dual",
+        "nloc": 48,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_wnm",
+        "nloc": 50,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_unprotected_wnm",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_tdls",
+        "nloc": 29,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_mesh",
+        "nloc": 29,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_multihop",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_self_protected",
+        "nloc": 22,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_dmg",
+        "nloc": 43,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_wmm",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_fst",
+        "nloc": 23,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_robust_av_streaming",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_unprotected_dmg",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vht",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_fils",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vendor_specific_protected",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vendor_specific",
+        "nloc": 17,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "save_action_no_ack_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "load_action_no_ack_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "create_action_no_ack",
+        "nloc": 9,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "save_association_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "load_association_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "create_association_request",
+        "nloc": 82,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "save_association_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "load_association_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "create_ap_association_response",
+        "nloc": 26,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "create_association_response",
+        "nloc": 42,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "save_atim_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "load_atim_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "create_atim",
+        "nloc": 10,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "save_authentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "load_authentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "create_authentication",
+        "nloc": 144,
+        "ccn": 33
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "save_beacon_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "load_beacon_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_ap_beacon",
+        "nloc": 146,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_beacon",
+        "nloc": 71,
+        "ccn": 10
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_beacon_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "save_deauthentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "load_deauthentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "create_deauthentication",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "create_deauthentication_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "save_disassociation_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "load_disassociation_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "create_disassociation",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "create_disassociation_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_attribute_tlv_fuzzing_data",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_data_element_tlv_fuzzing_data",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_ie_data",
+        "nloc": 9,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_default_ie_data",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_data_by_fuzzing_type",
+        "nloc": 143,
+        "ccn": 30
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_ex_data_by_fuzzing_type",
+        "nloc": 201,
+        "ccn": 35
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_fuzzing_ie",
+        "nloc": 96,
+        "ccn": 19
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_ies",
+        "nloc": 160,
+        "ccn": 33
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_radom_ie",
+        "nloc": 17,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_fuzzing_ies",
+        "nloc": 107,
+        "ccn": 25
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_status",
+        "nloc": 21,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "init_ie_creator",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "save_probe_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "load_probe_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "create_probe_request",
+        "nloc": 53,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "create_probe_request_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "save_probe_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "load_probe_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_ap_probe_response",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_probe_response",
+        "nloc": 85,
+        "ccn": 12
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_probe_response_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "save_reassociation_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "load_reassociation_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "create_reassociation_request",
+        "nloc": 22,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "save_reassociation_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "load_reassociation_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "create_reassociation_response",
+        "nloc": 27,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "save_timing_advertisement_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "load_timing_advertisement_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "create_timing_advertisement",
+        "nloc": 31,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "usage_help",
+        "nloc": 33,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "test_bad_frame",
+        "nloc": 162,
+        "ccn": 43
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "sniff_ies",
+        "nloc": 101,
+        "ccn": 21
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_receive_thread",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_receive_thread_ex",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "init_ex",
+        "nloc": 40,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "read_packet_ex",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_packet_ex",
+        "nloc": 29,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_init",
+        "nloc": 59,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "init",
+        "nloc": 26,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "reinit",
+        "nloc": 17,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_frame",
+        "nloc": 32,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "frame_fuzzing",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "p2p_frame_fuzzing",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_action",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_sta_auth",
+        "nloc": 168,
+        "ccn": 34
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_ap_auth",
+        "nloc": 184,
+        "ccn": 48
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "is_target_beacon",
+        "nloc": 34,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "clone_ap",
+        "nloc": 26,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_beacon_csa",
+        "nloc": 33,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_action_csa",
+        "nloc": 34,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_beacon_ecsa",
+        "nloc": 45,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_action_ecsa",
+        "nloc": 44,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_mitm",
+        "nloc": 124,
+        "ccn": 25
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "return_frame_name",
+        "nloc": 136,
+        "ccn": 43
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "start_fuzzing",
+        "nloc": 593,
+        "ccn": 138
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "load_payloads",
+        "nloc": 40,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "save_exp_payload",
+        "nloc": 31,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "save_packet",
+        "nloc": 27,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "fuzzing",
+        "nloc": 358,
+        "ccn": 65
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "print_status",
+        "nloc": 141,
+        "ccn": 21
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "hash_function",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "ht_insert",
+        "nloc": 29,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "create_item",
+        "nloc": 9,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "create_table",
+        "nloc": 10,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "free_item",
+        "nloc": 6,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "free_table",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "print_table",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "ht_search",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/owfuzz.c",
+        "name": "main",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl.c",
+        "name": "is_awdl_frame",
+        "nloc": 21,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl.c",
+        "name": "handle_awdl",
+        "nloc": 39,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "awdl_frame_as_str",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "awdl_tlv_as_str",
+        "nloc": 54,
+        "ccn": 24
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "create_action_awdl",
+        "nloc": 28,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_new_owned",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_new_const",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_free",
+        "nloc": 6,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_data",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_len",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_strip",
+        "nloc": 8,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_take",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_u8",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_le16",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_be16",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_le32",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_be32",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_ether_addr",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_bytes",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_u8",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_le16",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_be16",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_le32",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_be32",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_ether_addr",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_bytes",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_bytes_copy",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_int_string",
+        "nloc": 13,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_tlv",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_tlv8",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "get_p2p_attribute_by_fuzzing_type",
+        "nloc": 93,
+        "ccn": 22
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_frame_p2p_fuzzing_attribute",
+        "nloc": 14,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "p2p_ie_fuzzing",
+        "nloc": 25,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "wps_ie_fuzzing",
+        "nloc": 20,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_beacon",
+        "nloc": 65,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_association_request",
+        "nloc": 68,
+        "ccn": 13
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_association_response",
+        "nloc": 28,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_default_p2p_probe_request",
+        "nloc": 10,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_probe_request",
+        "nloc": 11,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_probe_response",
+        "nloc": 64,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_invitation_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_invitation_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_device_discoverability_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_device_discoverability_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_provision_discovery_request",
+        "nloc": 35,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_provision_discovery_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_confirmation",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_beacon",
+        "nloc": 17,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_probe",
+        "nloc": 27,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_action",
+        "nloc": 16,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_frame",
+        "nloc": 4,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "check_p2p_attributes",
+        "nloc": 201,
+        "ccn": 50
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "handle_p2p",
+        "nloc": 250,
+        "ccn": 48
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action",
+        "nloc": 47,
+        "ccn": 12
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "get_p2p_frame",
+        "nloc": 33,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "find_mesh_node_by_beacon",
+        "nloc": 37,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "find_mesh_node_by_lldp",
+        "nloc": 34,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "handle_mesh",
+        "nloc": 16,
+        "ccn": 3
+      }
+    ],
+    "summary": {
+      "c_files": 60,
+      "functions": 288,
+      "file_nloc": 12150,
+      "summed_function_ccn": 2190
+    }
+  },
+  "refactored": {
+    "commit": "e98b03ea115275be1b5c3011413a43a3b26d3e80",
+    "files": [
+      {
+        "path": "owfuzz/src/common/config.c",
+        "nloc": 543,
+        "physical_lines": 646
+      },
+      {
+        "path": "owfuzz/src/common/log.c",
+        "nloc": 52,
+        "physical_lines": 85
+      },
+      {
+        "path": "owfuzz/src/common/mac_addr.c",
+        "nloc": 144,
+        "physical_lines": 185
+      },
+      {
+        "path": "owfuzz/src/common/pcap_log.c",
+        "nloc": 51,
+        "physical_lines": 83
+      },
+      {
+        "path": "owfuzz/src/common/queue.c",
+        "nloc": 54,
+        "physical_lines": 67
+      },
+      {
+        "path": "owfuzz/src/frames/80211_packet_common.c",
+        "nloc": 433,
+        "physical_lines": 542
+      },
+      {
+        "path": "owfuzz/src/frames/control/acknowledgement.c",
+        "nloc": 21,
+        "physical_lines": 51
+      },
+      {
+        "path": "owfuzz/src/frames/control/beamforming_report_poll.c",
+        "nloc": 18,
+        "physical_lines": 46
+      },
+      {
+        "path": "owfuzz/src/frames/control/block_ack.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/block_ack_request.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/cf_end.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/cf_end_cf_ack.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/control_frame_extension.c",
+        "nloc": 6,
+        "physical_lines": 27
+      },
+      {
+        "path": "owfuzz/src/frames/control/control_wrapper.c",
+        "nloc": 17,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/control/cts.c",
+        "nloc": 17,
+        "physical_lines": 43
+      },
+      {
+        "path": "owfuzz/src/frames/control/ps_poll.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/rts.c",
+        "nloc": 18,
+        "physical_lines": 44
+      },
+      {
+        "path": "owfuzz/src/frames/control/vht_ndp_announcement.c",
+        "nloc": 18,
+        "physical_lines": 47
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 41
+      },
+      {
+        "path": "owfuzz/src/frames/data/d_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data.c",
+        "nloc": 220,
+        "physical_lines": 274
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/data_null.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data.c",
+        "nloc": 732,
+        "physical_lines": 985
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_ack.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_ack_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_data_cf_poll.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/data/qos_null.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/extension/dmg_beacon.c",
+        "nloc": 1,
+        "physical_lines": 20
+      },
+      {
+        "path": "owfuzz/src/frames/frame.c",
+        "nloc": 488,
+        "physical_lines": 640
+      },
+      {
+        "path": "owfuzz/src/frames/legacy_registry.c",
+        "nloc": 406,
+        "physical_lines": 409
+      },
+      {
+        "path": "owfuzz/src/frames/management/action.c",
+        "nloc": 809,
+        "physical_lines": 1492
+      },
+      {
+        "path": "owfuzz/src/frames/management/action_no_ack.c",
+        "nloc": 17,
+        "physical_lines": 41
+      },
+      {
+        "path": "owfuzz/src/frames/management/association_request.c",
+        "nloc": 137,
+        "physical_lines": 195
+      },
+      {
+        "path": "owfuzz/src/frames/management/association_response.c",
+        "nloc": 131,
+        "physical_lines": 197
+      },
+      {
+        "path": "owfuzz/src/frames/management/atim.c",
+        "nloc": 17,
+        "physical_lines": 42
+      },
+      {
+        "path": "owfuzz/src/frames/management/authentication.c",
+        "nloc": 184,
+        "physical_lines": 304
+      },
+      {
+        "path": "owfuzz/src/frames/management/beacon.c",
+        "nloc": 269,
+        "physical_lines": 375
+      },
+      {
+        "path": "owfuzz/src/frames/management/deauthentication.c",
+        "nloc": 25,
+        "physical_lines": 56
+      },
+      {
+        "path": "owfuzz/src/frames/management/disassociation.c",
+        "nloc": 25,
+        "physical_lines": 56
+      },
+      {
+        "path": "owfuzz/src/frames/management/ies_common.c",
+        "nloc": 1,
+        "physical_lines": 20
+      },
+      {
+        "path": "owfuzz/src/frames/management/ies_creator.c",
+        "nloc": 1668,
+        "physical_lines": 2588
+      },
+      {
+        "path": "owfuzz/src/frames/management/probe_request.c",
+        "nloc": 107,
+        "physical_lines": 159
+      },
+      {
+        "path": "owfuzz/src/frames/management/probe_response.c",
+        "nloc": 138,
+        "physical_lines": 194
+      },
+      {
+        "path": "owfuzz/src/frames/management/reassociation_request.c",
+        "nloc": 78,
+        "physical_lines": 127
+      },
+      {
+        "path": "owfuzz/src/frames/management/reassociation_response.c",
+        "nloc": 70,
+        "physical_lines": 126
+      },
+      {
+        "path": "owfuzz/src/frames/management/timing_advertisement.c",
+        "nloc": 52,
+        "physical_lines": 102
+      },
+      {
+        "path": "owfuzz/src/fuzz_control.c",
+        "nloc": 2503,
+        "physical_lines": 3126
+      },
+      {
+        "path": "owfuzz/src/hashtable.c",
+        "nloc": 99,
+        "physical_lines": 139
+      },
+      {
+        "path": "owfuzz/src/owfuzz.c",
+        "nloc": 8,
+        "physical_lines": 28
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/awdl.c",
+        "nloc": 66,
+        "physical_lines": 91
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "nloc": 99,
+        "physical_lines": 146
+      },
+      {
+        "path": "owfuzz/src/procedures/awdl/wire.c",
+        "nloc": 210,
+        "physical_lines": 262
+      },
+      {
+        "path": "owfuzz/src/procedures/direct/direct.c",
+        "nloc": 1270,
+        "physical_lines": 1646
+      },
+      {
+        "path": "owfuzz/src/procedures/mesh/mesh.c",
+        "nloc": 89,
+        "physical_lines": 132
+      },
+      {
+        "path": "owfuzz/src/protocols/cli.c",
+        "nloc": 170,
+        "physical_lines": 188
+      },
+      {
+        "path": "owfuzz/src/protocols/modules/ethernet.c",
+        "nloc": 18,
+        "physical_lines": 20
+      },
+      {
+        "path": "owfuzz/src/protocols/modules/wifi_be.c",
+        "nloc": 29,
+        "physical_lines": 34
+      },
+      {
+        "path": "owfuzz/src/protocols/modules/wifi_legacy.c",
+        "nloc": 36,
+        "physical_lines": 37
+      },
+      {
+        "path": "owfuzz/src/protocols/protocol.c",
+        "nloc": 74,
+        "physical_lines": 76
+      }
+    ],
+    "functions": [
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_open",
+        "nloc": 15,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_frames",
+        "nloc": 29,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_sta_frames",
+        "nloc": 2,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ap_frames",
+        "nloc": 2,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_interfaces",
+        "nloc": 51,
+        "ccn": 14
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_channels",
+        "nloc": 51,
+        "ccn": 13
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_macs",
+        "nloc": 62,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_fuzzing_option",
+        "nloc": 187,
+        "ccn": 45
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ies_status",
+        "nloc": 56,
+        "ccn": 15
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_config_get_ext_ies_status",
+        "nloc": 56,
+        "ccn": 15
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_add_virtual_interface",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_del_virtual_interface",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/config.c",
+        "name": "owfuzz_change_interface_mac",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_init",
+        "nloc": 9,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_log",
+        "nloc": 28,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/log.c",
+        "name": "fuzz_logger_cleanup",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "parse_mac",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "parse_half_mac",
+        "nloc": 15,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "generate_valid_mac",
+        "nloc": 32,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "generate_mac",
+        "nloc": 12,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "increase_mac_adress",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "get_next_mac",
+        "nloc": 48,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/common/mac_addr.c",
+        "name": "print_mac",
+        "nloc": 5,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "open_pcap",
+        "nloc": 26,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "write_pcap",
+        "nloc": 13,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/pcap_log.c",
+        "name": "close_pcap",
+        "nloc": 8,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_init",
+        "nloc": 6,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_empty",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_push",
+        "nloc": 19,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_pop",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/common/queue.c",
+        "name": "ow_queue_destroy",
+        "nloc": 10,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "print_options",
+        "nloc": 58,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "create_ieee_hdr",
+        "nloc": 76,
+        "ccn": 19
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "increase_seqno",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_seqno",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_fragno",
+        "nloc": 7,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_next_seqno",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "set_seqno",
+        "nloc": 15,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "set_fragno",
+        "nloc": 12,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_addr",
+        "nloc": 49,
+        "ccn": 10
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_bssid",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_source",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_destination",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_transmitter",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_receiver",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "get_elemet",
+        "nloc": 70,
+        "ccn": 20
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "generate_random_data",
+        "nloc": 37,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "ntohll",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "htonll",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "dumphex",
+        "nloc": 13,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/80211_packet_common.c",
+        "name": "print_interaction_status",
+        "nloc": 28,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/frames/control/acknowledgement.c",
+        "name": "create_ack",
+        "nloc": 20,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/beamforming_report_poll.c",
+        "name": "create_beamforming_report_poll",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/block_ack.c",
+        "name": "create_block_ack",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/block_ack_request.c",
+        "name": "create_block_ack_request",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cf_end.c",
+        "name": "create_cf_end",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cf_end_cf_ack.c",
+        "name": "create_cf_end_cf_ack",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/control_frame_extension.c",
+        "name": "create_control_frame_extension",
+        "nloc": 5,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/control_wrapper.c",
+        "name": "create_control_wrapper",
+        "nloc": 16,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/cts.c",
+        "name": "create_cts",
+        "nloc": 16,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/ps_poll.c",
+        "name": "create_ps_poll",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/rts.c",
+        "name": "create_rts",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/control/vht_ndp_announcement.c",
+        "name": "create_vht_ndp_announcement",
+        "nloc": 17,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_ack.c",
+        "name": "create_d_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_ack_poll.c",
+        "name": "create_d_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/d_cf_poll.c",
+        "name": "create_d_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data.c",
+        "name": "create_data",
+        "nloc": 213,
+        "ccn": 44
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_ack.c",
+        "name": "create_data_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_ack_poll.c",
+        "name": "create_data_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_cf_poll.c",
+        "name": "create_data_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/data_null.c",
+        "name": "create_data_null",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_ack.c",
+        "name": "create_qos_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_ack_poll.c",
+        "name": "create_qos_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_cf_poll.c",
+        "name": "create_qos_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_qos_data",
+        "nloc": 264,
+        "ccn": 69
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m1",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m2",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m3",
+        "nloc": 117,
+        "ccn": 17
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data.c",
+        "name": "create_eapol_m4",
+        "nloc": 115,
+        "ccn": 16
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_ack.c",
+        "name": "create_qos_data_cf_ack",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_ack_poll.c",
+        "name": "create_qos_data_cf_ack_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_data_cf_poll.c",
+        "name": "create_qos_data_cf_poll",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/data/qos_null.c",
+        "name": "create_qos_null",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "return_frame_type",
+        "nloc": 5,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "get_frame",
+        "nloc": 9,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "get_default_frame",
+        "nloc": 8,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "calc_chksum",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "pack_icmp",
+        "nloc": 18,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "tv_sub",
+        "nloc": 9,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "unpack_icmp",
+        "nloc": 23,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "init_ping_sock",
+        "nloc": 35,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_ping",
+        "nloc": 57,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_deauth",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_disassoc",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "check_alive_by_pkts",
+        "nloc": 19,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "save_fuzzing_state",
+        "nloc": 6,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "load_fuzzing_state",
+        "nloc": 6,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "hex_to_ascii",
+        "nloc": 23,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "hex_to_ascii_hex",
+        "nloc": 25,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "str_to_hex",
+        "nloc": 27,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/frames/frame.c",
+        "name": "log_pkt",
+        "nloc": 165,
+        "ccn": 49
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_association_response",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_reassociation_response",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_probe_response",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_timing_advertisement",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_beacon",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_atim",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_disassociation",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_deauthentication",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_action",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_action_no_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_association_request",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_reassociation_request",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_probe_request",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_authentication",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_beamforming_report_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_vht_ndp_announcement",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_control_frame_extension",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_control_wrapper",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_block_ack_request",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_block_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_ps_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_rts",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cts",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cf_end",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cf_end_cf_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_data",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_data",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_data_cf_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_data_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_data_cf_ack_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_null",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cf_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_cf_ack_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_data_cf_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_data_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_data_cf_ack_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_null",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_cf_ack",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "build_qos_cf_ack_cf_poll",
+        "nloc": 8,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "baseline_beacon",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "baseline_association_response",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "ow_wifi_find_id",
+        "nloc": 6,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/legacy_registry.c",
+        "name": "ow_wifi_find_name",
+        "nloc": 7,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "save_action_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "load_action_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "create_action",
+        "nloc": 134,
+        "ccn": 54
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "create_action_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_spectrum",
+        "nloc": 22,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_qos",
+        "nloc": 24,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_dls",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_block_ack",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_public",
+        "nloc": 56,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_radio_measurement",
+        "nloc": 24,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_ft",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_ht",
+        "nloc": 25,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_sa_query",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_protected_dual",
+        "nloc": 48,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_wnm",
+        "nloc": 50,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_unprotected_wnm",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_tdls",
+        "nloc": 29,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_mesh",
+        "nloc": 29,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_multihop",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_self_protected",
+        "nloc": 22,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_dmg",
+        "nloc": 43,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_wmm",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_fst",
+        "nloc": 23,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_robust_av_streaming",
+        "nloc": 21,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_unprotected_dmg",
+        "nloc": 19,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vht",
+        "nloc": 20,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_fils",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vendor_specific_protected",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action.c",
+        "name": "handle_action_vendor_specific",
+        "nloc": 17,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "save_action_no_ack_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "load_action_no_ack_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/action_no_ack.c",
+        "name": "create_action_no_ack",
+        "nloc": 9,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "save_association_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "load_association_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_request.c",
+        "name": "create_association_request",
+        "nloc": 82,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "save_association_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "load_association_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "create_ap_association_response",
+        "nloc": 26,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/association_response.c",
+        "name": "create_association_response",
+        "nloc": 42,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "save_atim_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "load_atim_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/atim.c",
+        "name": "create_atim",
+        "nloc": 10,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "save_authentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "load_authentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/authentication.c",
+        "name": "create_authentication",
+        "nloc": 144,
+        "ccn": 33
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "save_beacon_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "load_beacon_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_ap_beacon",
+        "nloc": 146,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_beacon",
+        "nloc": 71,
+        "ccn": 10
+      },
+      {
+        "file": "owfuzz/src/frames/management/beacon.c",
+        "name": "create_beacon_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "save_deauthentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "load_deauthentication_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "create_deauthentication",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/deauthentication.c",
+        "name": "create_deauthentication_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "save_disassociation_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "load_disassociation_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "create_disassociation",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/disassociation.c",
+        "name": "create_disassociation_ies",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_attribute_tlv_fuzzing_data",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_data_element_tlv_fuzzing_data",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_ie_data",
+        "nloc": 9,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "add_default_ie_data",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_data_by_fuzzing_type",
+        "nloc": 143,
+        "ccn": 30
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_ex_data_by_fuzzing_type",
+        "nloc": 201,
+        "ccn": 35
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_fuzzing_ie",
+        "nloc": 96,
+        "ccn": 19
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_ies",
+        "nloc": 160,
+        "ccn": 33
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_radom_ie",
+        "nloc": 17,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "create_frame_fuzzing_ies",
+        "nloc": 107,
+        "ccn": 25
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "get_ie_status",
+        "nloc": 21,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/frames/management/ies_creator.c",
+        "name": "init_ie_creator",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "save_probe_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "load_probe_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "create_probe_request",
+        "nloc": 53,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_request.c",
+        "name": "create_probe_request_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "save_probe_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "load_probe_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_ap_probe_response",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_probe_response",
+        "nloc": 85,
+        "ccn": 12
+      },
+      {
+        "file": "owfuzz/src/frames/management/probe_response.c",
+        "name": "create_probe_response_fuzzing_ies",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "save_reassociation_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "load_reassociation_request_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_request.c",
+        "name": "create_reassociation_request",
+        "nloc": 22,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "save_reassociation_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "load_reassociation_response_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/reassociation_response.c",
+        "name": "create_reassociation_response",
+        "nloc": 27,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "save_timing_advertisement_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "load_timing_advertisement_state",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/frames/management/timing_advertisement.c",
+        "name": "create_timing_advertisement",
+        "nloc": 31,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "usage_help",
+        "nloc": 33,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "test_bad_frame",
+        "nloc": 162,
+        "ccn": 43
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "sniff_ies",
+        "nloc": 101,
+        "ccn": 21
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_receive_thread",
+        "nloc": 18,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_receive_thread_ex",
+        "nloc": 21,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "init_ex",
+        "nloc": 40,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "read_packet_ex",
+        "nloc": 14,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_packet_ex",
+        "nloc": 29,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "oi_init",
+        "nloc": 59,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "init",
+        "nloc": 26,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "reinit",
+        "nloc": 17,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_frame",
+        "nloc": 32,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "frame_fuzzing",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "p2p_frame_fuzzing",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_action",
+        "nloc": 3,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_sta_auth",
+        "nloc": 168,
+        "ccn": 34
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_ap_auth",
+        "nloc": 184,
+        "ccn": 48
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "is_target_beacon",
+        "nloc": 34,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "clone_ap",
+        "nloc": 26,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_beacon_csa",
+        "nloc": 33,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_action_csa",
+        "nloc": 34,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_beacon_ecsa",
+        "nloc": 45,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "send_mitm_action_ecsa",
+        "nloc": 44,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "handle_mitm",
+        "nloc": 124,
+        "ccn": 25
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "return_frame_name",
+        "nloc": 5,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "start_fuzzing",
+        "nloc": 593,
+        "ccn": 140
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "load_payloads",
+        "nloc": 40,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "save_exp_payload",
+        "nloc": 31,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "save_packet",
+        "nloc": 27,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "fuzzing",
+        "nloc": 360,
+        "ccn": 66
+      },
+      {
+        "file": "owfuzz/src/fuzz_control.c",
+        "name": "print_status",
+        "nloc": 141,
+        "ccn": 21
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "hash_function",
+        "nloc": 7,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "ht_insert",
+        "nloc": 29,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "create_item",
+        "nloc": 9,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "create_table",
+        "nloc": 10,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "free_item",
+        "nloc": 6,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "free_table",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "print_table",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/hashtable.c",
+        "name": "ht_search",
+        "nloc": 11,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/owfuzz.c",
+        "name": "main",
+        "nloc": 5,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl.c",
+        "name": "is_awdl_frame",
+        "nloc": 21,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl.c",
+        "name": "handle_awdl",
+        "nloc": 39,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "awdl_frame_as_str",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "awdl_tlv_as_str",
+        "nloc": 54,
+        "ccn": 24
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/awdl_frame.c",
+        "name": "create_action_awdl",
+        "nloc": 28,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_new_owned",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_new_const",
+        "nloc": 11,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_free",
+        "nloc": 6,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_data",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_len",
+        "nloc": 4,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_strip",
+        "nloc": 8,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "buf_take",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_u8",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_le16",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_be16",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_le32",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_be32",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_ether_addr",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "write_bytes",
+        "nloc": 7,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_u8",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_le16",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_be16",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_le32",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_be32",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_ether_addr",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_bytes",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_bytes_copy",
+        "nloc": 8,
+        "ccn": 4
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_int_string",
+        "nloc": 13,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_tlv",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/awdl/wire.c",
+        "name": "read_tlv8",
+        "nloc": 15,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "get_p2p_attribute_by_fuzzing_type",
+        "nloc": 93,
+        "ccn": 22
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_frame_p2p_fuzzing_attribute",
+        "nloc": 14,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "p2p_ie_fuzzing",
+        "nloc": 25,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "wps_ie_fuzzing",
+        "nloc": 20,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_beacon",
+        "nloc": 65,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_association_request",
+        "nloc": 68,
+        "ccn": 13
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_association_response",
+        "nloc": 28,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_default_p2p_probe_request",
+        "nloc": 10,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_probe_request",
+        "nloc": 11,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_probe_response",
+        "nloc": 64,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_invitation_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_invitation_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_device_discoverability_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_device_discoverability_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_provision_discovery_request",
+        "nloc": 35,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_provision_discovery_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_request",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_response",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action_go_negotiation_confirmation",
+        "nloc": 23,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_beacon",
+        "nloc": 17,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_probe",
+        "nloc": 27,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_action",
+        "nloc": 16,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "is_p2p_frame",
+        "nloc": 4,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "check_p2p_attributes",
+        "nloc": 201,
+        "ccn": 50
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "handle_p2p",
+        "nloc": 250,
+        "ccn": 48
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "create_p2p_action",
+        "nloc": 47,
+        "ccn": 12
+      },
+      {
+        "file": "owfuzz/src/procedures/direct/direct.c",
+        "name": "get_p2p_frame",
+        "nloc": 33,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "find_mesh_node_by_beacon",
+        "nloc": 37,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "find_mesh_node_by_lldp",
+        "nloc": 34,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/procedures/mesh/mesh.c",
+        "name": "handle_mesh",
+        "nloc": 16,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "usage",
+        "nloc": 10,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "number",
+        "nloc": 11,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "mac",
+        "nloc": 16,
+        "ccn": 8
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "write32",
+        "nloc": 6,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "pcap_header",
+        "nloc": 7,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "pcap_send",
+        "nloc": 9,
+        "ccn": 6
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "wifi_send",
+        "nloc": 2,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "ow_protocol_cli",
+        "nloc": 93,
+        "ccn": 58
+      },
+      {
+        "file": "owfuzz/src/protocols/cli.c",
+        "name": "main",
+        "nloc": 6,
+        "ccn": 2
+      },
+      {
+        "file": "owfuzz/src/protocols/modules/ethernet.c",
+        "name": "arp_request",
+        "nloc": 14,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/modules/wifi_be.c",
+        "name": "ml_probe_response",
+        "nloc": 20,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/modules/wifi_be.c",
+        "name": "ml_bad_length",
+        "nloc": 2,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/modules/wifi_legacy.c",
+        "name": "build",
+        "nloc": 20,
+        "ccn": 9
+      },
+      {
+        "file": "owfuzz/src/protocols/modules/wifi_legacy.c",
+        "name": "ow_prepare_wifi_legacy",
+        "nloc": 12,
+        "ccn": 3
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_register",
+        "nloc": 16,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_find_family",
+        "nloc": 8,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_find_frame",
+        "nloc": 8,
+        "ccn": 5
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_generate",
+        "nloc": 16,
+        "ccn": 18
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_deliver",
+        "nloc": 6,
+        "ccn": 7
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "ow_random",
+        "nloc": 5,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "identity",
+        "nloc": 1,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "bitflip",
+        "nloc": 6,
+        "ccn": 1
+      },
+      {
+        "file": "owfuzz/src/protocols/protocol.c",
+        "name": "truncate_packet",
+        "nloc": 2,
+        "ccn": 1
+      }
+    ],
+    "summary": {
+      "c_files": 66,
+      "functions": 358,
+      "file_nloc": 11966,
+      "summed_function_ccn": 2173
+    }
+  }
+}

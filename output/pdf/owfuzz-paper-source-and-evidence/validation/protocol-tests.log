@@ -1,0 +1,18 @@
+make: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz'
+make -C src/protocols test
+make[1]: Entering directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/protocols'
+python3 ../../../tools/generate_protocol_registry.py build/offline_registry.c modules/ethernet.c modules/wifi_be.c
+./build/test_protocol
+Protocol registry, packet bounds, deterministic mutation, and transport isolation passed
+python3 test_cli.py ./build/owfuzz-protocol
+CLI validation, PCAP encoding, reproducibility, and zero-core-edit extension passed
+python3 test_legacy.py
+All 42 legacy adapters match frozen dispatch for absent/present received packets
+python3 ../../../tools/test_extension_metrics.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+make[1]: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz/src/protocols'
+make: Leaving directory '/home/marcopcg/programming/cefet-rj/Owfuzz/owfuzz'
