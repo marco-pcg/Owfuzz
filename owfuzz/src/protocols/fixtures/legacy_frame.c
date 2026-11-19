@@ -159,4 +159,3 @@ struct packet baseline_get_frame(uint8_t frame_type, struct ether_addr bssid, st
 
 	return pkt;
 }
-

@@ -141,3 +141,12 @@ the known empty stub, and reproducible Ethernet/Multi-Link campaigns. The core
 registry tests also passed AddressSanitizer/UndefinedBehaviorSanitizer; leak checking
 was disabled because the execution environment runs under ptrace. Existing legacy
 compiler warnings remain, and live hardware behavior remains unverified.
+
+### Seeded legacy campaigns
+
+Protocol campaigns disable clock reseeding in the legacy builders and random-data
+helper, including when `--seed 0` is selected. The legacy libc PRNG maps zero to
+one; the native campaign mutator still retains its explicit uint32 seed-zero state.
+Reproducibility is checked across separate processes on the same build/platform;
+libc random sequences are not a cross-platform wire-format contract. Interactive
+legacy mode retains clock reseeding when its seed is zero.

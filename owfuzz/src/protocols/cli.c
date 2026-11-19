@@ -155,6 +155,9 @@ int ow_protocol_cli(int argc, char **argv)
 #ifndef OW_STANDALONE
     /* Legacy builders retain their existing globals; generic modules do not use them. */
     fuzz_logger_init(-2, NULL); /* Keep legacy log text out of binary PCAP stdout. */
+    /* Legacy code uses a zero seed as a clock-reseeding sentinel. Campaigns
+     * are always seeded, including --seed 0 (libc maps zero to seed one). */
+    fuzzing_opt.seed = context.random_state ? context.random_state : 1;
     srandom(context.random_state);
     fuzzing_opt.auth_type = OPEN_NONE;
     strcpy(fuzzing_opt.target_ssid,"owfuzz");
