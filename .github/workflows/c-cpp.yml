@@ -1,0 +1,22 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run offline protocol tests
+      run: make -C owfuzz test-protocols
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libnl-3-dev libnl-genl-3-dev libpcap-dev
+    - name: Build and run integrated tests
+      run: make -C owfuzz test-integrated
